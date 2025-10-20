@@ -1,0 +1,13 @@
+@echo off
+cd /d "C:\Users\MY PC\OneDrive\Desktop\f"
+echo Starting Vite development server...
+echo Checking for node and npm...
+node --version
+npm --version
+echo.
+echo Installing dependencies if needed...
+npm install --no-audit --no-fund
+echo.
+echo Starting development server on port 5173...
+npx vite --port 5173 --host 0.0.0.0
+pause

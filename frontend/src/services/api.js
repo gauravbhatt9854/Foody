@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -18,19 +18,14 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor to handle common errors
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
@@ -51,13 +46,8 @@ export const authAPI = {
 // Menu endpoints
 export const menuAPI = {
   getMenuItems: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/menu?${queryParams.toString()}`);
+    const queryParams = new URLSearchParams(params).toString();
+    return api.get(`/menu?${queryParams}`);
   },
   getMenuItem: (id) => api.get(`/menu/${id}`),
   createMenuItem: (itemData) => api.post('/menu', itemData),
@@ -70,13 +60,8 @@ export const menuAPI = {
 // Order endpoints
 export const orderAPI = {
   getOrders: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/orders?${queryParams.toString()}`);
+    const queryParams = new URLSearchParams(params).toString();
+    return api.get(`/orders?${queryParams}`);
   },
   getOrder: (id) => api.get(`/orders/${id}`),
   createOrder: (orderData) => api.post('/orders', orderData),
@@ -89,13 +74,8 @@ export const orderAPI = {
 // User management endpoints (Admin only)
 export const userAPI = {
   getUsers: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/users?${queryParams.toString()}`);
+    const queryParams = new URLSearchParams(params).toString();
+    return api.get(`/users?${queryParams}`);
   },
   getUser: (id) => api.get(`/users/${id}`),
   createUser: (userData) => api.post('/users', userData),
@@ -110,35 +90,17 @@ export const userAPI = {
 export const analyticsAPI = {
   getDashboard: () => api.get('/analytics/dashboard'),
   getRevenue: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/analytics/revenue?${queryParams.toString()}`);
+    const queryParams = new URLSearchParams(params).toString();
+    return api.get(`/analytics/revenue?${queryParams}`);
   },
   getMenuPerformance: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/analytics/menu-performance?${queryParams.toString()}`);
+    const queryParams = new URLSearchParams(params).toString();
+    return api.get(`/analytics/menu-performance?${queryParams}`);
   },
   getCustomerInsights: () => api.get('/analytics/customer-insights'),
   exportData: (type, params = {}) => {
-    const queryParams = new URLSearchParams();
-    queryParams.append('type', type);
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    return api.get(`/analytics/export?${queryParams.toString()}`, {
-      responseType: 'blob',
-    });
+    const queryParams = new URLSearchParams({ type, ...params }).toString();
+    return api.get(`/analytics/export?${queryParams}`, { responseType: 'blob' });
   },
 };
 

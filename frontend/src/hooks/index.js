@@ -134,14 +134,19 @@ export const useForm = (initialValues, validationRules = {}) => {
 
     let error = '';
 
-    if (rule.required && (!value || value.toString().trim() === '')) {
-      error = rule.required;
-    } else if (rule.pattern && value && !rule.pattern.test(value)) {
+    if (rule.required) {
+      const requiredMessage = typeof rule.required === 'function' ? rule.required(value, values) : rule.required;
+      if (requiredMessage && (!value || value.toString().trim() === '')) {
+        error = requiredMessage;
+      }
+    }
+    
+    if (!error && rule.pattern && value && !rule.pattern.test(value)) {
       error = rule.patternMessage || 'Invalid format';
-    } else if (rule.minLength && value && value.length < rule.minLength) {
+    } else if (!error && rule.minLength && value && value.length < rule.minLength) {
       error = rule.minLengthMessage || `Minimum ${rule.minLength} characters required`;
-    } else if (rule.custom && value) {
-      error = rule.custom(value) || '';
+    } else if (!error && rule.custom) {
+      error = rule.custom(value, values) || '';
     }
 
     if (error) {

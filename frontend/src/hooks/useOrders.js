@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { orderAPI } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 /**
  * Custom hook for fetching orders with filtering and pagination
