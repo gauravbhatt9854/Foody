@@ -11,14 +11,14 @@ console.log('PORT:', process.env.PORT);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const menuRoutes = require('./routes/menu');
-const orderRoutes = require('./routes/orders');
-const userRoutes = require('./routes/users');
-const analyticsRoutes = require('./routes/analytics');
+const authRoutes = require('./src/routes/auth.js');
+const menuRoutes = require('./src/routes/menu.js');
+const orderRoutes = require('./src/routes/orders.js');
+const userRoutes = require('./src/routes/users.js');
+const analyticsRoutes = require('./src/routes/analytics.js');
 
 // Import middleware
-const { authenticateToken } = require('./middleware/auth');
+const { authenticateToken } = require('./src/middleware/auth.js');
 
 const app = express();
 const server = http.createServer(app);
