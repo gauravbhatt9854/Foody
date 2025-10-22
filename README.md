@@ -7,7 +7,7 @@ Foody has been completely enhanced with a modern, Zomato-like design and user ex
 ## ✨ New Features & Enhancements
 
 ### 🎨 UI/UX Improvements
-- **Zomato-inspired Design**: Modern, clean interface with vibrant red (#dc2626) color scheme
+- **Zomato-inspired Design**: Modern, clean interface with vibrant red (#dc2626) color scheme 
 - **Enhanced Typography**: Inter font family for better readability
 - **Card-based Layout**: Beautiful food item cards with hover effects and animations
 - **Responsive Design**: Optimized for mobile, tablet, and desktop devices
