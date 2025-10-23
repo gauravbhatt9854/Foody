@@ -4,7 +4,7 @@
 
 Foody has been completely enhanced with a modern, Zomato-like design and user experience. The app now features a vibrant color scheme, improved UI components, and enhanced functionality for a seamless food ordering experience.
 
-## ✨ New Features & Enhancements
+## ✨ New Features & Enhancements 
 
 ### 🎨 UI/UX Improvements
 - **Zomato-inspired Design**: Modern, clean interface with vibrant red (#dc2626) color scheme 
