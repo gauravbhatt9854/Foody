@@ -77,17 +77,17 @@ app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
 // Health check route
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    message: 'Foody API is running!', 
-    timestamp: new Date().toISOString(),
-    environment: {
-      NODE_ENV: process.env.NODE_ENV,
-      FRONTEND_URL: process.env.FRONTEND_URL,
-      PORT: process.env.PORT
-    }
-  });
-});
+// app.get('/api/health', (req, res) => {
+//   res.json({ 
+//     message: 'Foody API is running!', 
+//     timestamp: new Date().toISOString(),
+//     environment: {
+//       NODE_ENV: process.env.NODE_ENV,
+//       FRONTEND_URL: process.env.FRONTEND_URL,
+//       PORT: process.env.PORT
+//     }
+//   });
+// });
 
 // Simple test route to check CORS
 app.get('/api/test-cors', (req, res) => {
